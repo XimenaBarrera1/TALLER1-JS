@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio#3 JS</title>
+    <link rel="stylesheet" href="../css/estilo.css">
+</head>
+
+<body>
+
+    <!--
+   3. Crea una calculadora de estadísticas que permita  ingresar una lista de números y calcule la media, la mediana y la desviación estándar de los números ingresados.
+
+    Ejemplo:
+    Entrada: [12, 15, 20, 25, 30]
+    Salida:
+    Media: 20.4
+    Mediana: 20
+    Desviación Estándar: 6.73
+    -->
+
+    <div class=" flexContainer">
+
+        <div class="div2">
+            <form class="form" action="" id="form">
+                <legend class="legend">Calculadora Estadistica</legend>
+                <p style="font-family: Georgia">Ingrese una serie de numeros y separelos por comas:</p>
+                <textarea id="inputNumeros" rows="4" cols="30" style="border: 10px solid;"></textarea>
+                <br>
+                <button type="button" onclick="Calcular()" class="button2">Calcular</button>
+                <br><br>
+                <div class="div3">
+                    <h3 class="h3">Resultados:</h3>
+                    <div >
+                        media: <span id="media"></span> <br>
+                        mediana: <span id="mediana"></span> <br>
+                        Desviacion: <span id="desviacion"></span>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        function calcularMedia(numeros) {
+            const media = numeros.reduce((total, valor) => total + valor, 0);
+            return media / numeros.length;
+        }
+
+        function calcularMediana(numeros) {
+            numeros.sort((a, b) => a - b);
+            const mitad = Math.floor(numeros.length / 2);
+
+            if (numeros.length % 2 === 0) {
+                const mediana = (numeros[mitad - 1] + numeros[mitad]) / 2;
+                return mediana;
+            } else {
+                const mediana = numeros[mitad];
+                return mediana;
+            }
+        }
+
+        function calcularDesviacionEstandar(numeros) {
+            const media = calcularMedia(numeros);
+            const sumaDiferenciasAlCuadrado = numeros.reduce((total, valor) => {
+                const diferencia = valor - media;
+                return total + (diferencia * diferencia);
+            }, 0);
+
+            const desviacionEstandar = Math.sqrt(sumaDiferenciasAlCuadrado / numeros.length);
+            return desviacionEstandar;
+        }
+
+        function Calcular() {
+            const inputNumeros = document.getElementById("inputNumeros").value;
+            const numeros = inputNumeros.split(",").map(numero => parseFloat(numero.trim()));
+
+            if (numeros.some(isNaN)) {
+                alert("Ingresa números válidos.");
+                return;
+            }
+
+            const media = calcularMedia(numeros);
+            const mediana = calcularMediana(numeros);
+            const desviacion = calcularDesviacionEstandar(numeros);
+
+            const button1 = document.getElementById("media").textContent = media.toFixed(2);
+
+            const button2 = document.getElementById("mediana").textContent = mediana.toFixed(2);
+
+            const button3 = document.getElementById("desviacion").textContent = desviacion.toFixed(2);
+        }
+
+
+    </script>
+
+</body>
+
+</html>

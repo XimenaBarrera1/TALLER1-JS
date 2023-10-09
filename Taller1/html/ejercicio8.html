@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio#8 JS</title>
+    <link rel="stylesheet" href="../css/estilo.css">
+
+</head>
+<body>
+
+    
+    <!-- 
+        8. Crea un generador de contraseñas seguras que permita al usuario especificar la longitud de la contraseña y qué tipos de caracteres debe contener (mayúsculas, minúsculas, números y caracteres especiales).
+
+         Ejemplo:
+         Entrada (Longitud de la contraseña): 12
+         Entrada (Incluir mayúsculas): Sí
+         Entrada (Incluir números): Sí
+         Entrada (Incluir caracteres especiales): Sí
+         Salida: "T3$rPq8#zBfX"
+     -->
+
+     <div class="flexContainer">
+    <div class="div2">
+    <h1>Generador de Contraseñas</h1>
+    <form>
+        <label for="length">Longitud de la Contraseña:</label>
+        <input  required type="number" id="length" min="1" value="8" >
+        <br><br>
+        <label for="uppercase">Incluir Mayúsculas:</label>
+        <input type="checkbox" id="uppercase" checked>
+        <br>
+        <label for="numbers">Incluir Números:</label>
+        <input type="checkbox" id="numbers" checked>
+        <br>
+        <label for="specialChars">Incluir Caracteres Especiales:</label>
+        <input type="checkbox" id="specialChars" checked>
+        <br><br>
+        <button type="button" onclick="generarContraseña()" class="button2">Generar Contraseña</button>
+    </form>
+    <div id="password"></div>
+</div>
+</div>
+    <script>
+        const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
+        const numberChars = '0123456789';
+        const specialChars = '!@#$%^&*()_+[]{}|;:,.<>?';
+
+        function generarContraseña() {
+            const length = parseInt(document.getElementById("length").value);
+            const includeUppercase = document.getElementById("uppercase").checked;
+            const includeNumbers = document.getElementById("numbers").checked;
+            const includeSpecialChars = document.getElementById("specialChars").checked;
+
+            let charset = lowercaseChars;
+            if (includeUppercase) charset += uppercaseChars;
+            if (includeNumbers) charset += numberChars;
+            if (includeSpecialChars) charset += specialChars;
+
+            let contraseña = '';
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * charset.length);
+                contraseña += charset.charAt(randomIndex);
+            }
+
+            document.getElementById("password").textContent = contraseña;
+        }
+    </script>
+</body>
+</html>

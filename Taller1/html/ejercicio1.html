@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio#1 JS</title>
+    <link rel="stylesheet" href="../css/estilo.css">
+
+</head>
+
+<body>
+    <!--
+   1. Genera un número aleatorio entre 1 y 100 y pide al usuario que adivine el número leyéndolo desde una página Web. Proporciona pistas de "más alto" o "más bajo" hasta que el usuario adivine el número.
+    -->
+
+    <div class="flexContainer">
+
+        <div  class="container">
+
+            <h3 id="titulo" class="h3"> Adivina el numero aleatorio</h3>
+
+            <input id="input" type="number" placeholder="Digita un numero">
+            <button id="button" class="button" onclick="run()">Adivinar</button>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        let numeroAleatorio = Math.floor(Math.random() * 100) + 1;
+        let usuarioInput = 0;
+
+        function run() {
+
+            usuarioInput = parseInt(document.getElementById("input").value);
+
+            if (usuarioInput > numeroAleatorio) {
+
+                window.alert("Más bajo");
+
+            } else if (usuarioInput < numeroAleatorio) {
+
+                window.alert("Más Alto");
+
+            } else if (usuarioInput == numeroAleatorio) {
+                window.alert("ADIVINASTE!!");
+
+
+            }
+
+
+        }
+
+
+    </script>
+</body>
+
+</html>

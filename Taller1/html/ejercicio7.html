@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio#7 JS</title>
+    <link rel="stylesheet" href="../css/estilo.css">
+</head>
+
+<body>
+    
+    <div class="flexContainer">
+        <div class="div">
+            <form class="form" action="" id="formRegistro">
+                <legend class="legend">CALCULADORA DE INTERES COMPUESTO</legend>
+                <input id="capitalInicial" type="number" placeholder="CAPITAL INICIAL" class="inputs">
+                <input id="TasaInteresAnual" type="number" placeholder="TASA DE INTERES ANUAL" class="inputs">
+                <input id="PeriodoInversionEnAnios" type="number" placeholder="AÑOS DE INVERSION" class="inputs">
+                <button type="button" onclick="calcularInteresCompuesto()" class="button2">CALCULAR</button>
+
+                <div class="div3">
+                    <h3 class="h3">Resultados:</h3>
+                    <div>
+                        Monto final: <span id="montoFinal"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function calcularInteresCompuesto() {
+            const capitalInicial = parseFloat(document.getElementById("capitalInicial").value);
+            const tasaInteresAnual = parseFloat(document.getElementById("TasaInteresAnual").value) / 100; 
+            const periodoInversion = parseInt(document.getElementById("PeriodoInversionEnAnios").value);
+
+            // Fórmula utilizada
+            const montoFinal = capitalInicial * Math.pow(1 + tasaInteresAnual, periodoInversion);
+
+            document.getElementById("montoFinal").textContent = `$${montoFinal.toFixed(2)}`;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio#2 JS</title>
+    <link rel="stylesheet" href="../css/estilo.css">
+</head>
+
+<body>
+
+    <!--
+   2. Crea un sistema de registro de estudiantes que permita agregar estudiantes
+    con información como nombre, edad y número de identificación. Luego, permite buscar y mostrar la información de un estudiante dado su número de identificación.
+
+    Ejemplo:
+    Entrada (agregar estudiante):
+    Nombre: "Juan Pérez"
+    Edad: 20
+    Número de Identificación: 12345
+    Entrada (buscar estudiante):
+    Número de Identificación a buscar: 12345
+    Salida: "Nombre: Juan Pérez, Edad: 20, Número de Identificación: 12345"
+    -->
+    <div class=" flexContainer">
+
+        <div class="div">
+            <form class="form" action="" id="form">
+
+                <legend class="legend"> SISTEMA DE REGISTRO DE ESTUDIANTES</legend>
+
+                <input id="nombre" type="text" placeholder="NOMBRE" class="inputs">
+                <input id="edad" type="number" placeholder="EDAD" class="inputs">
+                <input id="identificacion" type="number" placeholder="IDENTIFICACION" class="inputs">
+
+                <button type="button" onclick="registrar()" class="button2">REGISTRAR</button>
+
+
+            </form>
+        </div>
+
+    </div>
+
+    <div class=" flexContainer">
+
+        <div class="div">
+            <form class="form" action="" id="form">
+
+                <legend class="legend">Buscar estudiante</legend>
+                <label for="buscarIdentificacion">Número de Identificación:</label>
+                <input type="text" id="buscarIdentificacion" class="inputId">
+                <br><br>
+                <button type="button" onclick="buscarEstudiante()" class="button2">Buscar</button>
+
+                <label for="">Datos del Estudiante</label>
+                <textarea name="" id="resultado" cols="20" rows="7" style="border: 10px solid;"></textarea>
+
+            </form>
+        </div>
+
+    </div>
+
+
+
+
+    <script>
+
+        let estudiante = [];
+
+        function registrar() {
+            let nombre = document.getElementById("nombre").value;
+            let edad = document.getElementById("edad").value;
+            let identificacion = document.getElementById("identificacion").value;
+
+
+            estudiante.push({ nombre, edad, identificacion });
+
+
+            document.getElementById("nombre").value = "";
+            document.getElementById("edad").value = "";
+            document.getElementById("identificacion").value = "";
+
+            window.alert("Estudiante Registrado");
+        }
+
+        function buscarEstudiante() {
+            let buscarIdentificacion = document.getElementById("buscarIdentificacion").value;
+            let encontrado = estudiante.find(estudiante => estudiante.identificacion == buscarIdentificacion);
+
+            if (encontrado) {
+                document.getElementById("resultado").innerHTML = `
+                   Nombre: ${encontrado.nombre}
+                   Edad:${encontrado.edad}
+                   Identificación:${encontrado.identificacion}
+                `;
+            } else {
+                document.getElementById("resultado").innerHTML = "Estudiante no encontrado.";
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>

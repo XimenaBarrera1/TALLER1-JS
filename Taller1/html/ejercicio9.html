@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio#9 JS</title>
+    <link rel="stylesheet" href="../css/estilo.css">
+
+</head>
+
+<body>
+    <!-- 9. Escribe una función llamada calcularEstadisticas que tome una lista de calificaciones como argumento y devuelva un objeto con las siguientes estadísticas: el promedio de las calificaciones, la calificación más alta y la calificación más baja.
+
+         Ejemplo
+         Entrada: [85, 90, 78, 92, 88]
+         Salida:
+         Promedio: 86.6
+         Calificación más alta: 92
+         Calificación más baja: 78 -->
+    <div class="flexContainer">
+
+        <div class="div2">
+            <h1>Calculadora de Estadisticas</h1>
+            <form id="calificacionForm">
+                <label for="calificaciones">Ingrese las calificaciones y separelas por comas para que no haya
+                    errores:</label> <br>
+                <input type="text" id="calificaciones" required>
+                <button type="submit" class="button2">Calcular</button>
+            </form>
+            <div id="resultados">
+                <p>Promedio: <span id="promedio"></span></p>
+                <p>Calificación más alta: <span id="maxima"></span></p>
+                <p>Calificación más baja: <span id="minima"></span></p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const calificacionForm = document.getElementById('calificacionForm');
+            const calificacionesInput = document.getElementById('calificaciones');
+            const promedioSpan = document.getElementById('promedio');
+            const maximaSpan = document.getElementById('maxima');
+            const minimaSpan = document.getElementById('minima');
+
+            calificacionForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const calificaciones = calificacionesInput.value.split(',').map(parseFloat);
+
+                if (calificaciones.length > 0) {
+                    const promedio = calcularPromedio(calificaciones);
+                    const maxima = Math.max(...calificaciones);
+                    const minima = Math.min(...calificaciones);
+
+                    promedioSpan.textContent = promedio.toFixed(2);
+                    maximaSpan.textContent = maxima;
+                    minimaSpan.textContent = minima;
+                } else {
+                    alert('Ingrese al menos una calificación válida.');
+                }
+            });
+
+            function calcularPromedio(calificaciones) {
+                const suma = calificaciones.reduce((total, calificacion) => total + calificacion, 0);
+                return suma / calificaciones.length;
+            }
+        });
+    </script>
+
+</body>
+
+</html>

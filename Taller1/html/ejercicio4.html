@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio#4 JS</title>
+    <link rel="stylesheet" href="../css/estilo.css">
+    
+</head>
+<body>
+    <!--
+  4.Crea un programa que permita al usuario seleccionar un número y mostrar su tabla de multiplicar del 1 al 10. Además, debe permitir al usuario elegir cuántas filas mostrar.
+    Ejemplo:    
+    Entrada (Número seleccionado): 7
+    Entrada (Filas a mostrar): 5
+    Salida:
+    Tabla de multiplicar del 7
+    7*1 = 7
+    7*2 = 14
+    7*3 = 21
+    7*4 = 28
+    7*5 = 35
+    -->
+
+    <div class="flexContainer">
+
+     <div class="div3">
+
+    <h1>Tabla de Multiplicar</h1>
+    <label for="numero">Digite un numero:</label>
+    <input id="numero" type="number">
+    <br>
+    <label for="filas">Número de filas a mostrar:</label>
+    <input type="number" id="filas" min="1" max="10" value="10">
+    <br>
+    <button onclick="generarTabla()" class="button2">Generar Tabla</button>
+    <br><br>
+    <table id="tabla">
+    </table>
+    
+    </div>
+
+
+    </div>
+    <script>
+        function generarTabla() {
+            const numero = parseInt(document.getElementById("numero").value);
+            const filas = parseInt(document.getElementById("filas").value);
+            const tabla = document.getElementById("tabla");
+
+            tabla.innerHTML = "";
+
+          
+            for (let i = 1; i <= filas; i++) {
+                const resultado = numero * i;
+                const fila = document.createElement("tr");
+                const celda1 = document.createElement("td");
+                const celda2 = document.createElement("td");
+
+                celda1.textContent = `${numero} x ${i} = `;
+                celda2.textContent = resultado;
+
+                fila.appendChild(celda1);
+                fila.appendChild(celda2);
+                tabla.appendChild(fila);
+            }
+        }
+    </script>
+</body>
+</html>

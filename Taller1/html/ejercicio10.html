@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio#10 JS</title>
+    <link rel="stylesheet" href="../css/estilo.css">
+</head>
+
+<body>
+    <!-- Crea una calculadora de IMC que tome el peso y la altura de una persona como entrada y calcule su IMC. Luego, muestra un mensaje que indique si la persona está en el rango de peso bajo, peso normal, sobrepeso u obesidad.
+
+     Ejemplo de Entrada:
+     Peso: 70 kg
+     Altura: 1.75 m
+     Salida Esperada:
+     Tu IMC es 22.86, estás en el rango de peso normal.-->
+
+    <div class="flexContainer">
+
+        <div class="div2">
+            <h1>Calculadora IMC</h1>
+            <form id="imcForm">
+                <label for="peso">Peso (kg):</label>
+                <input type="number" id="peso" required step="0.01" class="inputId">
+                <br>
+                <label for="altura">Altura (metros):</label>
+                <input type="number" id="altura" required step="0.01" class="inputId">
+                <br>
+                <button type="submit" class="button2">Calcular IMC</button>
+            </form>
+            <div id="resultado"></div>
+        </div>
+
+    </div>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const imcForm = document.getElementById('imcForm');
+            const pesoInput = document.getElementById('peso');
+            const alturaInput = document.getElementById('altura');
+            const resultadoDiv = document.getElementById('resultado');
+
+            imcForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const peso = parseFloat(pesoInput.value);
+                const altura = parseFloat(alturaInput.value);
+
+                if (!isNaN(peso) && !isNaN(altura) && altura > 0) {
+                    const imc = calcularIMC(peso, altura);
+                    const resultado = obtenerResultadoIMC(imc);
+                    resultadoDiv.textContent = `Tu IMC es ${imc.toFixed(2)}, tu rango es ${resultado}.`;
+                } else {
+                    resultadoDiv.textContent = 'Ingresa un peso y una altura válidos.';
+                }
+            });
+
+            function calcularIMC(peso, altura) {
+                return peso / (altura * altura);
+            }
+
+            function obtenerResultadoIMC(imc) {
+                if (imc < 18.5) {
+                    return 'peso bajo';
+                } else if (imc >= 18.5 && imc < 24.9) {
+                    return 'peso normal';
+                } else if (imc >= 25 && imc < 29.9) {
+                    return 'sobrepeso';
+                } else {
+                    return 'obesidad';
+                }
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

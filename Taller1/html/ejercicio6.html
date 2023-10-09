@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio#6 JS</title>
+     <link rel="stylesheet" href="../css/estilo.css">
+</head>
+<body>
+
+     <!--Desarrolla un sistema de gestión de libros que permita agregar libros con información como título, autor y año de publicación. Además, permite buscar y mostrar información de libros por título o autor.
+
+     Ejemplo:
+     Entrada (agregar libro):
+     Título: "Cien años de soledad"
+     Autor: "Gabriel García Márquez"
+     Año de Publicación: 1967
+     Entrada (buscar libro por título):
+     Título a buscar: "Cien años de soledad"
+     Salida: "Título: Cien años de soledad, Autor: Gabriel García Márquez, Año de Publicación: 1967  -->
+
+    <div class="flexContainer">
+        <div class="div">
+            <form class="form" action="" id="formRegistro">
+                <legend class="legend">Registro de Libros</legend>
+                <input id="titulo" type="text" placeholder="Título" class="inputs">
+                <input id="autor" type="text" placeholder="Autor" class="inputs">
+                <input id="anio" type="number" placeholder="Año de Publicación" class="inputs">
+                <button type="button" onclick="registrarLibro()" class="button2">REGISTRAR</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="flexContainer">
+        <div class="div">
+            <form class="form" action="" id="formBusqueda">
+                <legend class="legend">Buscar Libro</legend>
+                <label for="buscarTitulo">Título:</label>
+                <input type="text" id="buscarTitulo" class="inputId" placeholder="Ingrese el título">
+                <br><br>
+                <label for="buscarAutor">Autor:</label>
+                <input type="text" id="buscarAutor" class="inputId" placeholder="Ingrese el autor">
+                <br><br>
+                <button type="button" onclick="buscarLibro()" class="button2">Buscar</button>
+                <label for="">Datos del Libro</label>
+                <textarea name="" id="resultado" cols="20" rows="7" style="border: 10px solid;"></textarea>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let libros = [];
+
+        function registrarLibro() {
+            let titulo = document.getElementById("titulo").value;
+            let autor = document.getElementById("autor").value;
+            let anio = document.getElementById("anio").value;
+
+            libros.push({ titulo, autor, anio });
+
+            document.getElementById("titulo").value = "";
+            document.getElementById("autor").value = "";
+            document.getElementById("anio").value = "";
+
+            window.alert("Libro Registrado");
+        }
+
+        function buscarLibro() {
+            let buscarTitulo = document.getElementById("buscarTitulo").value;
+            let buscarAutor = document.getElementById("buscarAutor").value;
+
+            let encontrados = libros.filter(libro => {
+                const tituloMatch = libro.titulo.toLowerCase().includes(buscarTitulo.toLowerCase());
+                const autorMatch = libro.autor.toLowerCase().includes(buscarAutor.toLowerCase());
+                return tituloMatch && autorMatch;
+            });
+
+            if (encontrados.length > 0) {
+                let resultados = "";
+                encontrados.forEach(libro => {
+                    resultados += `
+                        Título: ${libro.titulo}
+                        Autor: ${libro.autor}
+                        Año de Publicación: ${libro.anio}
+                       
+                    `;
+                });
+                document.getElementById("resultado").innerHTML = resultados;
+            } else {
+                document.getElementById("resultado").innerHTML = "Libro no encontrado.";
+            }
+        }
+    </script>
+
+</body>
+</html>
